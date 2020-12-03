@@ -3,14 +3,15 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
+@Entity(name = "Member") // JPA가 관리하는 객체
 @Table(name = "Member")
 public class Member {
 
     @Id
     private Long id;
-    @Column(name = "name")
+    @Column(name = "name" , unique = true, length = 10)
     private String name;
+    private int age;
 
     public Member() {
     }

@@ -1,7 +1,4 @@
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 
 public class Base {
 
@@ -224,5 +221,84 @@ public class Base {
         emf.close();
     }
 
+
+    /**
+     * 플러시
+     * 쓰기 지연 SQL 저장소 내용이 DB에 반영 (동기화)
+     * 영속성 컨텍스트를 비우지 않음
+     *
+     * 발생 시점
+     * em.flush() - 직접호출
+     * 트랜젝션 커밋 - 플러시 자동 호출
+     * JPQL 코드 실행 - 플러시 자동 호출
+     */
+    public void  step05(){
+        //하나만 생성 ( DB당 )
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
+
+        //프랜젝션 단위별로 manager 생성 (쓰레드간에 공유 금지)
+        EntityManager em = emf.createEntityManager();
+//        em.setFlushMode(FlushModeType.AUTO);    //기본값
+//        em.setFlushMode(FlushModeType.COMMIT);    //커밋시에만
+
+
+        // 트렌젠션 안에서 데이터 처리
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+
+        try {
+
+            Member member = new Member(200L , "member200");
+            em.persist(member);
+
+            em.flush(); // 강제 플러시
+
+            member.setName("zzzzz");
+
+            System.out.println("==============================");
+
+            tx.commit();
+        }catch (Exception e){
+
+        }finally {
+            em.close();
+        }
+        emf.close();
+    }
+
+    /**
+     *
+     */
+    public void step06(){
+        //하나만 생성 ( DB당 )
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
+
+        //프랜젝션 단위별로 manager 생성 (쓰레드간에 공유 금지)
+        EntityManager em = emf.createEntityManager();
+
+
+        // 트렌젠션 안에서 데이터 처리
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+
+        try {
+
+            Member member = em.find(Member.class, 150L);
+            member.setName("AAAAA");
+
+            em.detach(member);
+//            em.clear(); //영속성 콘텍스트 초기화
+//            em.close(); // 영속성 콘텍스트 종료
+
+            System.out.println("==============================");
+
+            tx.commit();
+        }catch (Exception e){
+
+        }finally {
+            em.close();
+        }
+        emf.close();
+    }
 
 }

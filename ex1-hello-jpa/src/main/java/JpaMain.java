@@ -11,6 +11,8 @@ public class JpaMain {
 //        base.step01();
 //        base.step02();
 //        base.step03();
-        base.step04();
+//        base.step04();
+//        base.step05();
+        base.step06();
     }
 }
