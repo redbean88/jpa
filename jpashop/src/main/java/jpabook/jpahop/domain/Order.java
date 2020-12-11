@@ -3,7 +3,6 @@ package jpabook.jpahop.domain;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
 @Table(name = "ORDERS")
 public class Order {
 
