@@ -1,3 +1,5 @@
+import domain.Member;
+
 import javax.persistence.*;
 
 public class Base {
@@ -7,7 +9,7 @@ public class Base {
      */
     public void step00(){
         //하나만 생성 ( DB당 )
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("study");
 
         //프랜젝션 단위별로 manager 생성 (쓰레드간에 공유 금지)
         EntityManager em = emf.createEntityManager();
@@ -173,11 +175,11 @@ public class Base {
         tx.begin();
 
         try {
-            Member member1 = new Member(150L , "A");
-            Member member2 = new Member(160L , "B");
+//            Member member1 = new Member(150L , "A");
+//            Member member2 = new Member(160L , "B");
 
-            em.persist(member1);
-            em.persist(member2);
+//            em.persist(member1);
+//            em.persist(member2);
 
             System.out.println("===============================");
 
@@ -248,12 +250,12 @@ public class Base {
 
         try {
 
-            Member member = new Member(200L , "member200");
-            em.persist(member);
+//            Member member = new Member(200L , "member200");
+//            em.persist(member);
 
             em.flush(); // 강제 플러시
 
-            member.setName("zzzzz");
+//            member.setName("zzzzz");
 
             System.out.println("==============================");
 
@@ -306,7 +308,7 @@ public class Base {
      */
     public void step07(){
         //하나만 생성 ( DB당 )
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("study");
 
         //프랜젝션 단위별로 manager 생성 (쓰레드간에 공유 금지)
         EntityManager em = emf.createEntityManager();

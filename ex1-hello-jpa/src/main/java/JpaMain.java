@@ -1,3 +1,6 @@
+import steps.Step;
+import steps.StepMapper;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -6,14 +9,29 @@ import javax.persistence.Persistence;
 public class JpaMain {
 
     public static void main(String[] args) {
-        Base base = new Base();
-/*        base.step00();*/
-//        base.step01();
-//        base.step02();
-//        base.step03();
-//        base.step04();
-//        base.step05();
-//        base.step06();
-        base.step07();
+
+        //하나만 생성 ( DB당 )
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("study");
+
+        //프랜젝션 단위별로 manager 생성 (쓰레드간에 공유 금지)
+        EntityManager em = emf.createEntityManager();
+
+        // 트렌젠션 안에서 데이터 처리
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+
+        try {
+
+            Step step = StepMapper.getStep("step04");
+            step.logic(em);
+
+            // 쿼리 적용
+            tx.commit();
+
+        } catch (Exception e) {
+            tx.rollback();
+        } finally {
+            em.close();
+        }
     }
 }

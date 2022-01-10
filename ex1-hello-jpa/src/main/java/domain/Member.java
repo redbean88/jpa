@@ -1,9 +1,11 @@
-import RoleType.RoleType;
+package domain;
 
-import javax.persistence.*;
-import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Entity() // JPA가 관리하는 객체
+@Entity(name = "TMember") // JPA가 관리하는 객체
 /**
  * 제약 조건 이름 설정
  */
@@ -15,10 +17,6 @@ import java.util.Date;
  *                  initialvalue= 1 , allocationSize = 1
  * )
  */
-@SequenceGenerator(
-        name = "member_seq_gen"
-        ,sequenceName = "member_seq"
-)
 public class Member {
 
     /**
@@ -31,7 +29,7 @@ public class Member {
      *
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "member_seq_gen")
+    @Column(name = "ID")
     private Long id;    // 타입은 숫자형
 
     /**
@@ -41,44 +39,9 @@ public class Member {
      * conlumnDefinition | 컬럼 정보를 직접 설정
      * percicion, scale | 큰 수자 사용
      */
-    @Column(name = "name" )
+    @Column(name = "NAME" )
     private String userName;
     private int age;
-
-    /**
-     * EnumType.ORDIANL | enum 순서를 저장 ( 비추천)
-     * EnumType.STRING | enum 이름을 저장
-     */
-    @Enumerated(EnumType.STRING)
-    private RoleType reoleType;
-
-    /**
-     * LocalDate , LocalDateTime 사용시 생략 가능
-     *
-     */
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createDate;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModifiedDate;
-
-    /**
-     * 문자는 CLOb
-     * 나머지는 Blob
-     */
-    @Lob
-    private String description;
-
-    @Transient // 생성 제외
-    private String temp;
-
-    public Member() {
-    }
-
-    public Member(Long id, String name) {
-        this.id = id;
-        this.userName = name;
-    }
 
     public Long getId() {
         return id;
@@ -94,5 +57,13 @@ public class Member {
 
     public void setName(String name) {
         this.userName = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }
