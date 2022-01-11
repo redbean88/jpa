@@ -11,6 +11,7 @@ public class Step04 implements Step {
     public void logic(EntityManager em) {
 
         Member member1 = new Member(150L , "A");
+        em.persist(member1);
 
         em.flush();
         em.clear();
@@ -18,7 +19,6 @@ public class Step04 implements Step {
 
         Member findMember = em.find(Member.class, 150L);
         findMember.setName("zzzzz");
-
 
     }
 }

@@ -19,6 +19,7 @@ public class Step02 implements Step {
         Member findMemeber1 = em.find(Member.class,101L); // 1차 캐시 사용
         Member findMemeber2 = em.find(Member.class,101L); // 1차 캐시 사용
 
+        System.out.println(member == findMemeber1);
         System.out.println(findMemeber1 == findMemeber2);
 
     }
