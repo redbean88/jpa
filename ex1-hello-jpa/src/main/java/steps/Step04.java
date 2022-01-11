@@ -1,30 +1,24 @@
 package steps;
 
-import domain.Member2;
+import domain.Member;
 
 import javax.persistence.EntityManager;
 
+/**
+ * 변경감지 (더티채킹)
+ */
 public class Step04 implements Step {
     public void logic(EntityManager em) {
 
-        // DB 데이터가 없을 경우
+        Member member1 = new Member(150L , "A");
 
-        //같은 객체 등록
-        Member2 member2 = new Member2();
-        member2.setId(2L);
-        member2.setName("HelloB");
-
-        em.merge(member2);
         em.flush();
         em.clear();
+        System.out.println("============DB에 반영 완료===============");
 
-        //과연?
-        Member2 findMember2 = em.find(Member2.class, 2L);
-        System.out.println("findMember2 = " + findMember2);
+        Member findMember = em.find(Member.class, 150L);
+        findMember.setName("zzzzz");
 
-
-        Member2 findMember1 = em.find(Member2.class, 1L);
-        System.out.println("findMember1 = " + findMember1);
 
     }
 }

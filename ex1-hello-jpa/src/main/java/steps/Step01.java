@@ -5,19 +5,21 @@ import domain.Member;
 import javax.persistence.EntityManager;
 import java.util.List;
 
+/**
+ * 1차 캐시 예제
+ */
 public class Step01 implements Step {
     public void logic(EntityManager em) {
 
-        // 비영속 상태 (new)
         Member member = new Member();
-        member.setId(1L);
-        member.setName("HelloA");
+        member.setId(101L);
+        member.setName("HelloJPA");
 
-        //영속 상태 (managed)
         em.persist(member);
-        Member findMemeber = em.find(Member.class, 1L);
 
-        System.out.println("findMemeber.getName() = " + findMemeber.getName());
+        Member findMemeber = em.find(Member.class,101L); // 1차 캐시 사용
+        System.out.println(String.format("findMemeber.id = %s",findMemeber.getId()));
+        System.out.println(String.format("findMemeber.name = %s",findMemeber.getName()));
 
     }
 }

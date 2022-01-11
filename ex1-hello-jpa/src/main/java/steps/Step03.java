@@ -4,23 +4,19 @@ import domain.Member;
 
 import javax.persistence.EntityManager;
 
+/**
+ * 트랜젝션을 지원하는 쓰기 지연 (버퍼링 기능)
+ */
 public class Step03 implements Step {
     public void logic(EntityManager em) {
 
-        // DB 데이터가 없을 경우
+        Member member1 = new Member(150L , "A");
+        Member member2 = new Member(160L , "B");
 
-        //같은 객체 등록
-        Member member2 = new Member();
-        member2.setId(1L);
-        member2.setName("HelloB");
+        em.persist(member1);
+        em.persist(member2);
 
-        em.merge(member2);
-        em.flush();
-        em.clear();
-
-        //과연?
-        Member findMember = em.find(Member.class, 1L);
-        System.out.println("findMember.getName() = " + findMember.getName());
+        System.out.println("============이선 이후로 DB에 반영한다===============");
 
     }
 }
