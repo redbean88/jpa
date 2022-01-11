@@ -19,7 +19,16 @@ import javax.persistence.Table;
  */
 public class Member {
 
-    /**
+	
+    public Member() {}
+
+	public Member(Long id, String userName) {
+		super();
+		this.id = id;
+		this.userName = userName;
+	}
+
+	/**
      * @Id | 직접할당
      * @GeneratedValue | 자동 생성
      * IDENTITY | 데이터베이스에 위임 , MYSQL

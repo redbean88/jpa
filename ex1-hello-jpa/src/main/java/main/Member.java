@@ -1,6 +1,8 @@
-import RoleType.RoleType;
-
+package main;
 import javax.persistence.*;
+
+import enums.RoleType;
+
 import java.util.Date;
 
 @Entity() // JPA가 관리하는 객체

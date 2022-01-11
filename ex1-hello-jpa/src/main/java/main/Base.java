@@ -1,3 +1,4 @@
+package main;
 import domain.Member;
 
 import javax.persistence.*;
