@@ -2,7 +2,7 @@ package domain;
 
 import javax.persistence.*;
 
-@Entity(name = "TMember") // JPA가 관리하는 객체
+@Entity(name = "Member") // JPA가 관리하는 객체
 /**
  * 제약 조건 이름 설정
  */

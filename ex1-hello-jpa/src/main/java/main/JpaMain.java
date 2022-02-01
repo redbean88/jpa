@@ -23,7 +23,7 @@ public class JpaMain {
 
         try {
 
-            Step step = StepMapper.getStep("step04");
+            Step step = StepMapper.getStep("step06");
             step.logic(em);
 
             // 쿼리 적용
@@ -33,6 +33,7 @@ public class JpaMain {
             tx.rollback();
         } finally {
             em.close();
+            emf.close();
         }
     }
 }
