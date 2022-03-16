@@ -23,13 +23,14 @@ public class JpaMain {
 
         try {
 
-            Step step = StepMapper.getStep("step06");
+            Step step = StepMapper.getStep("step21");
             step.logic(em);
 
             // 쿼리 적용
             tx.commit();
 
         } catch (Exception e) {
+            e.printStackTrace();
             tx.rollback();
         } finally {
             em.close();
