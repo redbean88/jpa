@@ -21,7 +21,7 @@ public abstract class Item {
 
     private String name;
     private int price;
-    private  int stotckQuantity;
+    private  int stockQuantity;
 
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
@@ -33,7 +33,7 @@ public abstract class Item {
      * @param quantity
      */
     public  void addStock(int quantity){
-        this.stotckQuantity += quantity;
+        this.stockQuantity += quantity;
     }
 
     /**
@@ -41,11 +41,11 @@ public abstract class Item {
      * @param quantity
      */
     public  void removeStock(int quantity){
-        int restStack =  this.stotckQuantity - quantity;
+        int restStack =  this.stockQuantity - quantity;
         if (restStack < 0){
             throw new NotEnoughStockException("need more stock");
         }
 
-        this.stotckQuantity -= quantity;
+        this.stockQuantity -= quantity;
     }
 }

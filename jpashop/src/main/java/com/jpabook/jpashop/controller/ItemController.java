@@ -31,7 +31,7 @@ public class ItemController {
         Book book = new Book();
         book.setName(form.getName());
         book.setPrice(form.getPrice());
-        book.setStotckQuantity(form.getStockQuantity());
+        book.setStockQuantity(form.getStockQuantity());
         book.setAuthor(form.getAuthor());
         book.setIsbn(form.getIsbn());
 
@@ -54,7 +54,7 @@ public class ItemController {
         bookForm.setId(item.getId());
         bookForm.setName(item.getName());
         bookForm.setPrice(item.getPrice());
-        bookForm.setStotckQuantity(item.getStotckQuantity());
+        bookForm.setStockQuantity(item.getStockQuantity());
         bookForm.setAuthor(item.getAuthor());
         bookForm.setIsbn(item.getIsbn());
 
@@ -69,11 +69,11 @@ public class ItemController {
         book.setId(form.getId());
         book.setName(form.getName());
         book.setPrice(form.getPrice());
-        book.setStotckQuantity(form.getStockQuantity());
+        book.setStockQuantity(form.getStockQuantity());
         book.setAuthor(form.getAuthor());
         book.setIsbn(form.getIsbn());
 
         itemService.saveItem(book);
-        return "rtedirect:items";
+        return "redirect:/items";
     }
 }
