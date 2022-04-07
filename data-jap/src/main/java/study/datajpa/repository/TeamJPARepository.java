@@ -1,8 +1,8 @@
-package study.datajap.repository;
+package study.datajpa.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import study.datajap.domain.Team;
+import study.datajpa.domain.Team;
 
 import javax.persistence.EntityManager;
 import java.util.List;

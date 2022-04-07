@@ -1,16 +1,14 @@
-package study.datajap.repository;
+package study.datajpa.repository;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
-import study.datajap.domain.Member;
+import study.datajpa.domain.Member;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -56,5 +54,51 @@ class MemberJPARepositoryTest {
         long deletedCount = memberJPARepository.count();
         assertThat(deletedCount).isEqualTo(0);
 
+    }
+
+    @Test
+    public void findByUsernameAndAgeGreaterThen(){
+        Member m1 = new Member("member1" , 10);
+        Member m2 = new Member("member1" , 15);
+        memberJPARepository.save(m1);
+        memberJPARepository.save(m2);
+
+        List<Member> result = memberJPARepository.findByUsernameAndAgeGreaterThan("member1", 10);
+        assertThat(result.get(0).getUsername()).isEqualTo(m2.getUsername());
+        assertThat(result.get(0).getAge()).isEqualTo(m2.getAge());
+        assertThat(result.size()).isEqualTo(1);
+    }
+
+    @Test
+    public void findByUsername(){
+
+        Member m1 = new Member("member1" , 10);
+        Member m2 = new Member("member1" , 15);
+        memberJPARepository.save(m1);
+        memberJPARepository.save(m2);
+
+        List<Member> result = memberJPARepository.findByUsername("member1");
+        Member member = result.get(0);
+        assertThat(member).isEqualTo(m1);
+    }
+
+    @Test
+    public void paging(){
+
+        memberJPARepository.save(new Member("member1", 10));
+        memberJPARepository.save(new Member("member2", 10));
+        memberJPARepository.save(new Member("member3", 10));
+        memberJPARepository.save(new Member("member4", 10));
+        memberJPARepository.save(new Member("member5", 10));
+
+        int age = 10;
+        int offset = 0;
+        int limit = 3;
+
+        List<Member> members = memberJPARepository.findByPage(age, offset, limit);
+        long totalcount = memberJPARepository.totalcount(10);
+
+        assertThat(members.size()).isEqualTo(3);
+        assertThat(totalcount).isEqualTo(5);
     }
 }

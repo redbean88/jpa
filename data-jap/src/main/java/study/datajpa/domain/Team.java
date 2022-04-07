@@ -1,4 +1,4 @@
-package study.datajap.domain;
+package study.datajpa.domain;
 
 import lombok.*;
 

@@ -1,7 +1,7 @@
-package study.datajap.repository;
+package study.datajpa.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import study.datajap.domain.Team;
+import study.datajpa.domain.Team;
 
 public interface TeamRepository extends JpaRepository<Team,Long> {
 }
