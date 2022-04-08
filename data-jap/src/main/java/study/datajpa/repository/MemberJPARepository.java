@@ -1,6 +1,5 @@
 package study.datajpa.repository;
 
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import study.datajpa.domain.Member;
 
@@ -68,5 +67,16 @@ public class MemberJPARepository {
         return em.createQuery("select count(m) from Member m where m.age = :age ", Long.class)
                 .setParameter("age", age)
                 .getSingleResult();
+    }
+
+    public int bulkAgePlus(int age){
+        return em.createQuery("update Member m set m.age = m.age + 1 where m.age >= :age ")
+                .setParameter("age" , age)
+                .executeUpdate();
+    }
+
+    public List<Member> findMemberJoinFetch(){
+        return em.createQuery("select m from Member m join fetch m.team", Member.class)
+                .getResultList();
     }
 }
