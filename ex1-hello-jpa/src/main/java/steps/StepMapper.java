@@ -17,11 +17,6 @@ public class StepMapper {
         steps.put("step07" , new Step07());
         steps.put("step08" , new Step08());
         steps.put("step09" , new Step09());
-        steps.put("step10" , new Step10());
-        steps.put("step11" , new Step11());
-        steps.put("step12" , new Step12());
-        steps.put("step20" , new Step20());
-        steps.put("step21" , new Step21());
 
     }
 
