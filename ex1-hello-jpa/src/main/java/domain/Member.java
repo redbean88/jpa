@@ -9,7 +9,11 @@ public class Member {
 	
     public Member() {}
 
-	public Member(Long id, String userName) {
+    public Member(String userName) {
+        this.userName = userName;
+    }
+
+    public Member(Long id, String userName) {
 		super();
 		this.id = id;
 		this.userName = userName;
@@ -17,6 +21,7 @@ public class Member {
 
     @Id
     @Column(name = "MEMBER_ID")
+    @GeneratedValue
     private Long id;    // 타입은 숫자형
 
     @Column(name = "NAME" )
@@ -24,8 +29,8 @@ public class Member {
     private int age;
 
     @ManyToOne
-    @JoinColumn(name = "TEAM_ID")
-    private Team team;
+    @JoinColumn(name = "TEAM_ID",insertable = false, updatable = false)
+    Team team;
 
     public String getUserName() {
         return userName;
@@ -33,24 +38,6 @@ public class Member {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public Team getTeam() {
-        return team;
-    }
-
-
-    /**
-     * 연관관계 편의 메서드
-     * 한쪽에만 만들어 준다
-     * @return
-     */
-    public void setTeam(Team team) {
-        this.team = team;
-
-        if(!team.getMembers().contains(this)){
-            team.getMembers().add(this);
-        }
     }
 
     public Long getId() {

@@ -12,8 +12,16 @@ public class Team {
     private long id;
     private String name;
 
-    @OneToMany(mappedBy = "team")
+    @OneToMany
+    @JoinColumn(name = "TEAM_ID") // MEMBER 테이블의 TEAM_ID
     private List<Member> members = new ArrayList<Member>();
+
+    public Team() {
+    }
+
+    public Team(String name) {
+        this.name = name;
+    }
 
     public long getId() {
         return id;
