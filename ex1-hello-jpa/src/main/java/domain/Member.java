@@ -1,8 +1,11 @@
 package domain;
 
 import javax.persistence.*;
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.List;
 
-@Entity(name = "TMember") // JPA가 관리하는 객체
+@Entity // JPA가 관리하는 객체
 @Table(name = "Member")
 public class Member {
 
@@ -14,7 +17,6 @@ public class Member {
     }
 
     public Member(Long id, String userName) {
-		super();
 		this.id = id;
 		this.userName = userName;
 	}
@@ -36,6 +38,12 @@ public class Member {
     @JoinColumn(name = "LOCKER_ID")
     private Locker locker;
 
+    @ManyToMany
+    @JoinTable(name = "MEMBER_PRODUCT",
+            joinColumns = @JoinColumn(name = "MEMBER_ID")
+            ,inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
+    private List<Product> products = new ArrayList<Product>();
+
     public Locker getLocker() {
         return locker;
     }
@@ -46,6 +54,22 @@ public class Member {
 
     public String getUserName() {
         return userName;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     public void setUserName(String userName) {

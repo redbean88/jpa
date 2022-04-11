@@ -2,21 +2,25 @@ package steps;
 
 import domain.Locker;
 import domain.Member;
-import domain.Team;
+import domain.Product;
 
 import javax.persistence.EntityManager;
 
-public class Step11 implements Step {
+public class Step12 implements Step {
     public void logic(EntityManager em) {
 
-        //일대다 단방향
+        //다대다 단방향
 
-        Member member1 = new Member("member1");
-        Locker locker1 = new Locker("locker1");
+        Product productA = new Product();
+        productA.setId(101L);
+        productA.setName("상품!");
+        em.persist(productA);
 
-        member1.setLocker(locker1);
+        Member member = new Member();
+        member.setId(101L);
+        member.setUserName("회원1");
+        member.getProducts().add(productA);
+        em.persist(member);
 
-        em.persist(member1);
-        em.persist(locker1);
     }
 }
