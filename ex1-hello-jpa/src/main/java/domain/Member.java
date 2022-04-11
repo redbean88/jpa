@@ -29,8 +29,12 @@ public class Member {
     private int age;
 
     @ManyToOne
-    @JoinColumn(name = "TEAM_ID",insertable = false, updatable = false)
-    Team team;
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
+
+    @OneToOne
+    @JoinColumn(name = "LOCKER_ID")
+    private Locker locker;
 
     public String getUserName() {
         return userName;
