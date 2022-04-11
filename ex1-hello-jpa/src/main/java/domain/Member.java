@@ -36,6 +36,14 @@ public class Member {
     @JoinColumn(name = "LOCKER_ID")
     private Locker locker;
 
+    public Locker getLocker() {
+        return locker;
+    }
+
+    public void setLocker(Locker locker) {
+        this.locker = locker;
+    }
+
     public String getUserName() {
         return userName;
     }
