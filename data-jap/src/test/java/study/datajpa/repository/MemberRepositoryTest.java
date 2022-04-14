@@ -316,6 +316,6 @@ class MemberRepositoryTest {
         em.flush();
         em.clear();
 
-        List<Member> memberCustom = memberRepository.findMemberCustom();
+        memberRepository.findMemberCustom();
     }
 }

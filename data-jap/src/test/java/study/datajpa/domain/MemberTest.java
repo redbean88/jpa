@@ -1,14 +1,17 @@
 package study.datajpa.domain;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
+import study.datajpa.repository.MemberRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 @Transactional
@@ -17,6 +20,9 @@ class MemberTest {
 
     @PersistenceContext
     EntityManager em;
+
+    @Autowired
+    MemberRepository memberRepository;
 
     @Test
     public void testEntity(){
@@ -47,4 +53,18 @@ class MemberTest {
         });
     }
 
+    @Test
+    public void JpaBase(){
+        Member member = new Member("test");
+        memberRepository.save(member);
+
+        try{
+            Thread.sleep(1000);
+            member.setUsername("korean");
+        }catch (Exception e){
+
+        }
+
+        Member findMember = memberRepository.findById(member.getId()).get();
+    }
 }
