@@ -15,6 +15,9 @@ public class Locker {
     @OneToOne(mappedBy = "locker")
     private Member member;
 
+    public Locker() {
+    }
+
     public Locker(String name) {
         this.name = name;
     }
