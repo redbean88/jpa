@@ -23,7 +23,7 @@ public class JpaMain {
 
         try {
 
-            Step step = StepMapper.getStep("step14");
+            Step step = StepMapper.getStep("step15");
             step.logic(em);
 
             // 쿼리 적용
